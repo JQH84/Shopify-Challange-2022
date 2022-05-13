@@ -1,6 +1,7 @@
 ![Shopify](https://cdn.shopify.com/s/files/1/0611/1605/5788/t/2/assets/shopify-internships-logo.svg)
 
-# Shopify Fall 2022 Challenge - Analysis By [Jihad Al-Hussain](https://www.github.com/jqh84) 
+# Shopify Fall 2022 Challenge - Analysis 
+By [Jihad Al-Hussain](https://www.github.com/jqh84) 
 
 ## The Problem 
 The problem of this challenge is to find out why we are getting a higher than expected average order value or AOV of $3145.13 when the shopify store data is only selling sneakers which are a relatively low cost item.

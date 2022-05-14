@@ -1,12 +1,10 @@
 ![Shopify](https://cdn.shopify.com/s/files/1/0611/1605/5788/t/2/assets/shopify-internships-logo.svg)
 
 # Shopify Fall 2022 Challenge - Analysis 
-By [Jihad Al-Hussain](https://www.github.com/jqh84) 
+By [Jihad Al-Hussain](https://www.github.com/jqh84) - github.com/jqh84
 
 ## The Problem 
 The problem of this challenge is to find out why we are getting a higher than expected average order value or AOV of $3145.13 when the shopify store data is only selling sneakers which are a relatively low cost item.
-
-
 
 ## Data Preparation & Exploration
 The raw data was downloaded and stored locally for further review. The spreadsheet was reviewed using Excel to have an understanding of the data. below are some insights that were gathered:
@@ -27,7 +25,6 @@ The data was loaded as a csv into a pandas dataframe so that i could easily work
 Since we identified that the outlier transactions are coming from multiple users and two distinct stores, It is worth investigating further by constructing some visuals using Python (PyViz) to play with the data and extract more information and insights from it.
 
 
-
 ## The Analysis Process 
 - The initial data exploration done with excel revealed that average order value was caused by several outliers from two stores and multiple users
 - Verify the data integrity by checking that the expected columns represent what we expect.
@@ -35,4 +32,6 @@ Since we identified that the outlier transactions are coming from multiple users
 - Document the data cleaning process in a separate document. or use some software like jupyter notebooks and python. 
 
 ## Conculsions and Insights Summary
+- if we assume there is no issues in the order amount values then a simple avarage is not the best way to measure the perforamnce.
+- other metrics can be sales per store per time of day and based on this dataset all sales were from March 2017 
 

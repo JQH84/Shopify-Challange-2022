@@ -67,3 +67,4 @@ it
 as an example below are the top 10 users by purchase amount.
 
 ![Top Users by Purchase Amount](/imgs/Top_users_amount_spent.png)
+

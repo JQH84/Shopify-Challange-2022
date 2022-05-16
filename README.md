@@ -56,15 +56,108 @@ What we can take away from this is that shop 42 had a higher price per shoe comp
 
 ![Value By Shop per order amount and Average Price](/imgs/Avg_shoePrice_orderAmount_perStore.png)
 
-it 
-## Conclusion & Challenge Questions 
+
+## Conclusion 
+
 - if we assume there is no issues in the order amount values then a simple average is not the best way to measure the AOV. Since this data is not normally distributed , we could remove out the outliers or use a mean of medians per store. 
 - Other metrics that could be measured for this data set can be :
     - Sales/Revenue per store: This can also be broken down by weekly revenue.
     - User Spend per store : this can give insight into which store and there which model shoe is the best overall. 
     - User purchase patterns can be deduced to see if any improvement can be made.
 
-as an example below are the top 10 users by purchase amount.
+here is an example of a weekly revenue per top 10 stores .
+
+| Shop ID 	| Sum of Order Amounts in $ 	| Total Items 	|
+|:---------:|:-----------------------------:|:-------------:|
+|    42   	|       11990176       	        |    34063    	|
+|    78   	|        2263800       	        |      88     	|
+|    89   	|         23128        	        |     118     	|
+|    81   	|         22656        	        |     128     	|
+|    6    	|         22627        	        |     121     	|
+|    13   	|         21760        	        |     136     	|
+|    59   	|         21538        	        |     121     	|
+|    71   	|         21320        	        |     130     	|
+|    19   	|         20538        	        |     126     	|
+|    70   	|         20241        	        |     117     	|
+
+here is the example of the top 10 users by purchase amount excluding user 607.
 
 ![Top Users by Purchase Amount](/imgs/Top_users_amount_spent.png)
 
+-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------
+QUESTION 2 :
+
+1. How many orders were shipped by Speedy Express in total? 
+
+Since we can see the SpeedyExpress is shipperID 1 we can write the following Query to get the total number of orders shipped by Speedy Express.
+
+```
+SELECT 
+  Count(OrderID) as Total_Orders_SpeedyExpress 
+FROM 
+  Orders 
+WHERE 
+  ShipperID = 1;
+```
+or if the shipperID may change at a later time we can use 
+
+```
+SELECT 
+  Count(OrderID) as Total_Orders_SpeedyExpress 
+FROM 
+  Orders as o 
+  JOIN Shippers as s ON o.ShipperID = s.ShipperID 
+WHERE 
+  s.ShipperName = 'Speedy Express';
+```
+
+**Answer :  Peacock , with Total Orders of 40**
+
+-----------------------------------------------------------------------------------------------------------------------
+2. What is the last name of the employee with the most orders? 
+
+The orders table contains the employee ID which can be linked to the employees table to get the last name of the employee. and a group and order by function to filter and sort to our desired result.
+we limit to 1 combined with a Descending order to get the top result.
+
+```
+SELECT 
+  e.LastName as LastName, 
+  Count(OrderID) as Total_Orders 
+FROM 
+  Orders as o 
+  JOIN Employees as e ON o.EmployeeID = e.EmployeeID 
+GROUP BY 
+  e.LastName 
+ORDER BY 
+  Count(OrderID) DESC 
+LIMIT 
+  1;
+
+```
+**Answer :  Peacock , with Total Orders of 40**
+
+-----------------------------------------------------------------------------------------------------------------------
+3. What product was ordered the most by customers in Germany?
+
+Here we can user the same orders table and the customers filtered by country to get the result. But to get the product info we need two more tables to join on , the products table and the order details table.
+
+```
+SELECT 
+  p.ProductName as ProductName, 
+  Count(*) as Total_Orders 
+FROM 
+  Orders as o 
+  JOIN Customers as c ON o.CustomerID = c.CustomerID 
+  JOIN OrderDetails as od ON o.OrderID = od.OrderID 
+  JOIN Products as p ON od.ProductID = p.ProductID 
+WHERE 
+  c.Country = 'Germany' 
+GROUP BY 
+  p.ProductName 
+ORDER BY 
+  Count(*) DESC 
+LIMIT 
+  1;
+```
+**Answer :  Gorgonzola Telino , with Total Orders of 5**
